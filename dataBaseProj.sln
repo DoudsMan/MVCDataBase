@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dataBaseProj", "dataBaseProj\dataBaseProj.csproj", "{351E9780-94AD-4056-B2C5-7DE27C6A95FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "databaseAPI", "databaseAPI\databaseAPI.csproj", "{15DAADFA-825E-4658-9476-AA745A16C0C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{199B28BF-B0CB-408E-B8AA-588248FE0FCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{351E9780-94AD-4056-B2C5-7DE27C6A95FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{351E9780-94AD-4056-B2C5-7DE27C6A95FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{351E9780-94AD-4056-B2C5-7DE27C6A95FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{351E9780-94AD-4056-B2C5-7DE27C6A95FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DAADFA-825E-4658-9476-AA745A16C0C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DAADFA-825E-4658-9476-AA745A16C0C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DAADFA-825E-4658-9476-AA745A16C0C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DAADFA-825E-4658-9476-AA745A16C0C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{199B28BF-B0CB-408E-B8AA-588248FE0FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{199B28BF-B0CB-408E-B8AA-588248FE0FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{199B28BF-B0CB-408E-B8AA-588248FE0FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{199B28BF-B0CB-408E-B8AA-588248FE0FCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
