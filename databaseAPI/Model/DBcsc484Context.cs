@@ -15,8 +15,9 @@ namespace databaseAPI.Model
         {
         }
 
-        public virtual DbSet<PersonAttributes> PersonAttributes { get; set; }
-        public virtual DbSet<Persons> Persons { get; set; }
+        public virtual DbSet<Appointment> Appointment { get; set; }
+        public virtual DbSet<Doctor> Doctor { get; set; }
+        public virtual DbSet<Patient> Patient { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,36 +31,61 @@ namespace databaseAPI.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PersonAttributes>(entity =>
+            modelBuilder.Entity<Appointment>(entity =>
             {
-                entity.HasKey(e => e.PersonId)
-                    .HasName("PK__PersonAt__AA2FFB85EB244509");
+                entity.Property(e => e.AppointmentDate).IsUnicode(false);
 
-                entity.Property(e => e.PersonId).ValueGeneratedNever();
+                entity.Property(e => e.AppointmentNotes).IsUnicode(false);
 
-                entity.Property(e => e.Ethnicity).IsUnicode(false);
+                entity.Property(e => e.AppointmentTime).IsUnicode(false);
 
-                entity.Property(e => e.Gender).IsUnicode(false);
+                entity.Property(e => e.DoctorId).IsUnicode(false);
 
-                entity.Property(e => e.Height).IsUnicode(false);
+                entity.Property(e => e.PatientId).IsUnicode(false);
 
-                entity.Property(e => e.Weight).IsUnicode(false);
+                entity.Property(e => e.RoomNumber).IsUnicode(false);
+
+                entity.HasOne(d => d.Doctor)
+                    .WithMany(p => p.Appointment)
+                    .HasForeignKey(d => d.DoctorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Appointme__docto__6A30C649");
+
+                entity.HasOne(d => d.Patient)
+                    .WithMany(p => p.Appointment)
+                    .HasForeignKey(d => d.PatientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Appointme__patie__6B24EA82");
             });
 
-            modelBuilder.Entity<Persons>(entity =>
+            modelBuilder.Entity<Doctor>(entity =>
             {
-                entity.HasKey(e => e.PersonId)
-                    .HasName("PK__Persons__AA2FFB85BF816C73");
+                entity.Property(e => e.DoctorId).IsUnicode(false);
 
-                entity.Property(e => e.PersonId).ValueGeneratedNever();
+                entity.Property(e => e.Department).IsUnicode(false);
 
-                entity.Property(e => e.Address).IsUnicode(false);
+                entity.Property(e => e.DoctorName).IsUnicode(false);
 
-                entity.Property(e => e.City).IsUnicode(false);
+                entity.Property(e => e.Specialty).IsUnicode(false);
+            });
 
-                entity.Property(e => e.FirstName).IsUnicode(false);
+            modelBuilder.Entity<Patient>(entity =>
+            {
+                entity.Property(e => e.PatientId).IsUnicode(false);
 
-                entity.Property(e => e.LastName).IsUnicode(false);
+                entity.Property(e => e.Condition).IsUnicode(false);
+
+                entity.Property(e => e.DoctorId).IsUnicode(false);
+
+                entity.Property(e => e.PatientName).IsUnicode(false);
+
+                entity.Property(e => e.RoomNumber).IsUnicode(false);
+
+                entity.HasOne(d => d.Doctor)
+                    .WithMany(p => p.Patient)
+                    .HasForeignKey(d => d.DoctorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Patient__doctorI__6754599E");
             });
 
             OnModelCreatingPartial(modelBuilder);
