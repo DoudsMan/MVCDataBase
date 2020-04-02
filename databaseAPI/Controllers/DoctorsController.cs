@@ -11,48 +11,48 @@ namespace databaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonAttributesController : ControllerBase
+    public class DoctorsController : ControllerBase
     {
         private readonly DBcsc484Context _context;
 
-        public PersonAttributesController(DBcsc484Context context)
+        public DoctorsController(DBcsc484Context context)
         {
             _context = context;
         }
 
-        // GET: api/PersonAttributes
+        // GET: api/Doctors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonAttributes>>> GetPersonAttributes()
+        public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctor()
         {
-            return await _context.PersonAttributes.ToListAsync();
+            return await _context.Doctor.ToListAsync();
         }
 
-        // GET: api/PersonAttributes/5
+        // GET: api/Doctors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PersonAttributes>> GetPersonAttributes(int id)
+        public async Task<ActionResult<Doctor>> GetDoctor(string id)
         {
-            var personAttributes = await _context.PersonAttributes.FindAsync(id);
+            var doctor = await _context.Doctor.FindAsync(id);
 
-            if (personAttributes == null)
+            if (doctor == null)
             {
                 return NotFound();
             }
 
-            return personAttributes;
+            return doctor;
         }
 
-        // PUT: api/PersonAttributes/5
+        // PUT: api/Doctors/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersonAttributes(int id, PersonAttributes personAttributes)
+        public async Task<IActionResult> PutDoctor(string id, Doctor doctor)
         {
-            if (id != personAttributes.PersonId)
+            if (id != doctor.DoctorId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(personAttributes).State = EntityState.Modified;
+            _context.Entry(doctor).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace databaseAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PersonAttributesExists(id))
+                if (!DoctorExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace databaseAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/PersonAttributes
+        // POST: api/Doctors
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<PersonAttributes>> PostPersonAttributes(PersonAttributes personAttributes)
+        public async Task<ActionResult<Doctor>> PostDoctor(Doctor doctor)
         {
-            _context.PersonAttributes.Add(personAttributes);
+            _context.Doctor.Add(doctor);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PersonAttributesExists(personAttributes.PersonId))
+                if (DoctorExists(doctor.DoctorId))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace databaseAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPersonAttributes", new { id = personAttributes.PersonId }, personAttributes);
+            return CreatedAtAction("GetDoctor", new { id = doctor.DoctorId }, doctor);
         }
 
-        // DELETE: api/PersonAttributes/5
+        // DELETE: api/Doctors/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonAttributes>> DeletePersonAttributes(int id)
+        public async Task<ActionResult<Doctor>> DeleteDoctor(string id)
         {
-            var personAttributes = await _context.PersonAttributes.FindAsync(id);
-            if (personAttributes == null)
+            var doctor = await _context.Doctor.FindAsync(id);
+            if (doctor == null)
             {
                 return NotFound();
             }
 
-            _context.PersonAttributes.Remove(personAttributes);
+            _context.Doctor.Remove(doctor);
             await _context.SaveChangesAsync();
 
-            return personAttributes;
+            return doctor;
         }
 
-        private bool PersonAttributesExists(int id)
+        private bool DoctorExists(string id)
         {
-            return _context.PersonAttributes.Any(e => e.PersonId == id);
+            return _context.Doctor.Any(e => e.DoctorId == id);
         }
     }
 }

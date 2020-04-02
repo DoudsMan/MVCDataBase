@@ -11,48 +11,48 @@ namespace databaseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class PatientsController : ControllerBase
     {
         private readonly DBcsc484Context _context;
 
-        public PersonsController(DBcsc484Context context)
+        public PatientsController(DBcsc484Context context)
         {
             _context = context;
         }
 
-        // GET: api/Persons
+        // GET: api/Patients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Persons>>> GetPersons()
+        public async Task<ActionResult<IEnumerable<Patient>>> GetPatient()
         {
-            return await _context.Persons.ToListAsync();
+            return await _context.Patient.ToListAsync();
         }
 
-        // GET: api/Persons/5
+        // GET: api/Patients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Persons>> GetPersons(int id)
+        public async Task<ActionResult<Patient>> GetPatient(string id)
         {
-            var persons = await _context.Persons.FindAsync(id);
+            var patient = await _context.Patient.FindAsync(id);
 
-            if (persons == null)
+            if (patient == null)
             {
                 return NotFound();
             }
 
-            return persons;
+            return patient;
         }
 
-        // PUT: api/Persons/5
+        // PUT: api/Patients/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersons(int id, Persons persons)
+        public async Task<IActionResult> PutPatient(string id, Patient patient)
         {
-            if (id != persons.PersonId)
+            if (id != patient.PatientId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(persons).State = EntityState.Modified;
+            _context.Entry(patient).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace databaseAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PersonsExists(id))
+                if (!PatientExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace databaseAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Persons
+        // POST: api/Patients
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Persons>> PostPersons(Persons persons)
+        public async Task<ActionResult<Patient>> PostPatient(Patient patient)
         {
-            _context.Persons.Add(persons);
+            _context.Patient.Add(patient);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PersonsExists(persons.PersonId))
+                if (PatientExists(patient.PatientId))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace databaseAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPersons", new { id = persons.PersonId }, persons);
+            return CreatedAtAction("GetPatient", new { id = patient.PatientId }, patient);
         }
 
-        // DELETE: api/Persons/5
+        // DELETE: api/Patients/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Persons>> DeletePersons(int id)
+        public async Task<ActionResult<Patient>> DeletePatient(string id)
         {
-            var persons = await _context.Persons.FindAsync(id);
-            if (persons == null)
+            var patient = await _context.Patient.FindAsync(id);
+            if (patient == null)
             {
                 return NotFound();
             }
 
-            _context.Persons.Remove(persons);
+            _context.Patient.Remove(patient);
             await _context.SaveChangesAsync();
 
-            return persons;
+            return patient;
         }
 
-        private bool PersonsExists(int id)
+        private bool PatientExists(string id)
         {
-            return _context.Persons.Any(e => e.PersonId == id);
+            return _context.Patient.Any(e => e.PatientId == id);
         }
     }
 }
