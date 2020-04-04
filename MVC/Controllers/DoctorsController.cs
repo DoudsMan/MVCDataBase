@@ -32,6 +32,7 @@ namespace MVC.Controllers
         // GET: Doctors/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
