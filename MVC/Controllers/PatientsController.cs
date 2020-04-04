@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MVC.Controllers
 {
@@ -32,7 +33,14 @@ namespace MVC.Controllers
         // GET: Patients/Create
         public ActionResult Create()
         {
-            return View();
+            var dbContext = new databaseAPI.Model.DBcsc484Context();
+            var createView = new databaseAPI.Model.PatientView();
+            var doctors = new databaseAPI.Controllers.DoctorsController(dbContext).GetDoctor();
+            doctors.Wait();
+            createView.Doctors = new SelectList(doctors.Result.Value, "DoctorId", "DoctorName");
+
+
+            return View(createView);
         }
 
         // POST: Patients/Create
@@ -44,12 +52,12 @@ namespace MVC.Controllers
             var newPatient = new databaseAPI.Model.Patient();
 
             //assign values from form
-            newPatient.PatientId = Convert.ToString(collection["patientID"]);
-            newPatient.DoctorId = Convert.ToString(collection["doctorID"]);
-            newPatient.PatientName = Convert.ToString(collection["PatientName"]);
-            newPatient.RoomNumber = Convert.ToString(collection["RoomNumber"]);
-            newPatient.Age = Convert.ToInt32(collection["Age"]);
-            newPatient.Condition = Convert.ToString(collection["Condition"]);
+            newPatient.PatientId = Convert.ToString(collection["Patient.PatientID"]);
+            newPatient.DoctorId = Convert.ToString(collection["Patient.DoctorID"]);
+            newPatient.PatientName = Convert.ToString(collection["Patient.PatientName"]);
+            newPatient.RoomNumber = Convert.ToString(collection["Patient.RoomNumber"]);
+            newPatient.Age = Convert.ToInt32(collection["Patient.Age"]);
+            newPatient.Condition = Convert.ToString(collection["Patient.Condition"]);
 
 
             try

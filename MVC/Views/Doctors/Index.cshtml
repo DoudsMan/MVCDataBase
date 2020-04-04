@@ -4,50 +4,51 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">Brookings Medical Center Doctors</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Specialty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+<div class="justify-content-center">
+    <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true" asp-action="Create">Add New Doctor</a>
+</div>
+
+
+
+<div class="container-fluid bg-light">
+    <div class="row border-bottom border-dark">
+        <div class="col">
+            @Html.DisplayNameFor(model => model.DoctorId)
+        </div>
+        <div class="col">
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </div>
+        <div class="col">
+            @Html.DisplayNameFor(model => model.Specialty)
+        </div>
+        <div class="col">
+            @Html.DisplayNameFor(model => model.Department)
+        </div>
+        <div class="col"></div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="row border-secondary border-bottom" >
+            <div class="col">
                 @Html.DisplayFor(modelItem => item.DoctorId)
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 @Html.DisplayFor(modelItem => item.DoctorName)
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 @Html.DisplayFor(modelItem => item.Specialty)
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
+            </div>
+            <div class="col">
                 <a asp-action="Edit" asp-route-id="@item.DoctorId.ToString()">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.DoctorId.ToString()">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.DoctorId.ToString()">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </div>
+        </div>
+    }   
+</div>
