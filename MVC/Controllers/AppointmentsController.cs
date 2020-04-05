@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using databaseAPI.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -128,7 +129,20 @@ namespace MVC.Controllers
             var appointment = new databaseAPI.Controllers.AppointmentsController(dbcontext).GetAppointment(id);
             appointment.Wait();
 
-            return View(appointment.Result.Value);
+            var appointmentvm = new AppointmentsViewModel();
+            //assign all appointments to vm
+            appointmentvm.AppointmentViewModel = appointment.Result.Value;
+            //get doctor with matching appointment doctor id
+            var doctor = new databaseAPI.Controllers.DoctorsController(dbcontext).GetDoctor().Result.Value.Where(x=>x.DoctorId == appointment.Result.Value.DoctorId);
+            //get patient with matching appointment patient id
+            var patient = new databaseAPI.Controllers.PatientsController(dbcontext).GetPatient().Result.Value.Where(x => x.PatientId == appointment.Result.Value.PatientId);
+
+
+            //assign doctor/patient to vm so their attributes can be accessed
+            appointmentvm.deleteDoctor = doctor.FirstOrDefault();
+            appointmentvm.deletePatient = patient.FirstOrDefault();
+
+            return View(appointmentvm);
 
         }
 

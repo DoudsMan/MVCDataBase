@@ -13,22 +13,22 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="@Model.AppointmentViewModel.RoomNumber" class="control-label"></label>
+                    <label class="control-label">Room Number</label>
                     <input asp-for="@Model.AppointmentViewModel.RoomNumber" class="form-control" />
                     <span asp-validation-for="@Model.AppointmentViewModel.RoomNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="@Model.AppointmentViewModel.AppointmentDate" class="control-label"></label>
-                    <input asp-for="@Model.AppointmentViewModel.AppointmentDate" class="form-control" />
+                    <label class="control-label">Appointment Date</label>
+                    <input type="date" asp-for="@Model.AppointmentViewModel.AppointmentDate" class="form-control" />
                     <span asp-validation-for="@Model.AppointmentViewModel.AppointmentDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="@Model.AppointmentViewModel.AppointmentTime" class="control-label"></label>
+                    <label class="control-label">Appointment Time</label>
                     <input asp-for="@Model.AppointmentViewModel.AppointmentTime" class="form-control" />
                     <span asp-validation-for="@Model.AppointmentViewModel.AppointmentTime" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="@Model.AppointmentViewModel.AppointmentNotes" class="control-label"></label>
+                    <label class="control-label">Appointment Notes</label>
                     <input asp-for="@Model.AppointmentViewModel.AppointmentNotes" class="form-control" />
                     <span asp-validation-for="@Model.AppointmentViewModel.AppointmentDate" class="text-danger"></span>
                 </div>
