@@ -1,4 +1,4 @@
-﻿@model databaseAPI.Model.Patient
+﻿@model databaseAPI.Model.PatientView
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,31 +12,31 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PatientId" />
+            <input type="hidden" asp-for="@Model.Patient.PatientId" />
             <div class="form-group">
-                <label asp-for="DoctorId" class="control-label"></label>
-                <input asp-for="DoctorId" class="form-control" />
-                <span asp-validation-for="DoctorId" class="text-danger"></span>
+                <label class="control-label">Doctor Name</label>
+                <select asp-for="@Model.Patient.DoctorId" class="form-control" asp-items="@Model.Doctors">
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="PatientName" class="control-label"></label>
-                <input asp-for="PatientName" class="form-control" />
-                <span asp-validation-for="PatientName" class="text-danger"></span>
+                <label asp-for="@Model.Patient.PatientName" class="control-label"></label>
+                <input asp-for="@Model.Patient.PatientName" class="form-control" />
+                <span asp-validation-for="@Model.Patient.PatientName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoomNumber" class="control-label"></label>
-                <input asp-for="RoomNumber" class="form-control" />
-                <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                <label asp-for="@Model.Patient.RoomNumber" class="control-label"></label>
+                <input asp-for="@Model.Patient.RoomNumber" class="form-control" />
+                <span asp-validation-for="@Model.Patient.RoomNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
+                <label asp-for="@Model.Patient.Age" class="control-label"></label>
+                <input asp-for="@Model.Patient.Age" class="form-control" />
+                <span asp-validation-for="@Model.Patient.Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" />
-                <span asp-validation-for="Condition" class="text-danger"></span>
+                <label asp-for="@Model.Patient.Condition" class="control-label"></label>
+                <input asp-for="@Model.Patient.Condition" class="form-control" />
+                <span asp-validation-for="@Model.Patient.Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
