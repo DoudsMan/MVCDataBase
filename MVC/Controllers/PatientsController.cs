@@ -38,7 +38,7 @@ namespace MVC.Controllers
             var doctors = new databaseAPI.Controllers.DoctorsController(dbContext).GetDoctor();
             doctors.Wait();
             createView.Doctors = new SelectList(doctors.Result.Value, "DoctorId", "DoctorName");
-
+            createView.Patient = new databaseAPI.Model.Patient();
 
             return View(createView);
         }
@@ -128,6 +128,8 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(string id, IFormCollection collection)
         {
+
+
             try
             {
                 var dbContext = new databaseAPI.Model.DBcsc484Context();
