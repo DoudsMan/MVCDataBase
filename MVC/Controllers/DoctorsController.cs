@@ -55,6 +55,7 @@ namespace MVC.Controllers
             {
                 var dbContext = new databaseAPI.Model.DBcsc484Context();
                 var patientController = new databaseAPI.Controllers.DoctorsController(dbContext).PostDoctor(newDoctor);
+                patientController.Wait();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,7 +80,7 @@ namespace MVC.Controllers
             var newDoctor = new databaseAPI.Model.Doctor();
 
             //assign values from form
-            newDoctor.DoctorId = Convert.ToString(collection["DoctorId"]);
+            newDoctor.DoctorId = id;
             newDoctor.DoctorName = Convert.ToString(collection["DoctorName"]);
             newDoctor.Specialty = Convert.ToString(collection["Specialty"]);
             newDoctor.Department = Convert.ToString(collection["Department"]);
@@ -88,6 +89,7 @@ namespace MVC.Controllers
             {
                 var dbContext = new databaseAPI.Model.DBcsc484Context();
                 var doctorController = new databaseAPI.Controllers.DoctorsController(dbContext).PutDoctor(id, newDoctor);
+                doctorController.Wait();
                 return RedirectToAction(nameof(Index));
             }
             catch

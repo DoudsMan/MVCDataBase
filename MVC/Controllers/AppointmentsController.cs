@@ -41,8 +41,7 @@ namespace MVC.Controllers
             patients.Wait();
             createViewModel.DoctorViewModel = new SelectList(DoctorViewModel.Result.Value, "DoctorId", "DoctorName");
             createViewModel.PatientViewModel = new SelectList(patients.Result.Value, "PatientId", "PatientName");
-
-
+            
             return View(createViewModel);
         }
 
