@@ -67,6 +67,7 @@ namespace MVC.Controllers
                 // TODO: Add insert logic here
                 var dbcontext = new databaseAPI.Model.DBcsc484Context();
                 var appointments = new databaseAPI.Controllers.AppointmentsController(dbcontext).PostAppointment(context);
+                appointments.Wait();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -113,6 +114,7 @@ namespace MVC.Controllers
                 // TODO: Add update logic here
                 var dbcontext = new databaseAPI.Model.DBcsc484Context();
                 var appointments = new databaseAPI.Controllers.AppointmentsController(dbcontext).PutAppointment(id,context);
+                appointments.Wait();
                 return RedirectToAction(nameof(Index));
             }
             catch

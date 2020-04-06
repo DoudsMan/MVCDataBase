@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using databaseAPI.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -64,6 +65,7 @@ namespace MVC.Controllers
             {
                 var dbContext = new databaseAPI.Model.DBcsc484Context();
                 var patientController = new databaseAPI.Controllers.PatientsController(dbContext).PostPatient(newPatient);
+                patientController.Wait();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -105,6 +107,7 @@ namespace MVC.Controllers
             {
                 var dbContext = new databaseAPI.Model.DBcsc484Context();
                 var patientController = new databaseAPI.Controllers.PatientsController(dbContext).PutPatient(id, newPatient);
+                patientController.Wait();
                 return RedirectToAction(nameof(Index));
             }
             catch
